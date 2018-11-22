@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { id_gen } from '../utils/url-id-generator';
 import OrderItemSchema from './order-item-model';
 
-const UserOrdersSchema = new mongoose.Schema(
+const UserOrderSchema = new mongoose.Schema(
   {
     _id: {
       type: String,
@@ -20,6 +20,9 @@ const UserOrdersSchema = new mongoose.Schema(
       required: true,
       index: true
     },
+    order_date: {
+      type: Date
+    },
     order_items: {
       type: [OrderItemSchema]
     }
@@ -29,4 +32,4 @@ const UserOrdersSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model('UserOrders', UserOrdersSchema, 'user_orders');
+export default mongoose.model('UserOrder', UserOrderSchema, 'user_order');

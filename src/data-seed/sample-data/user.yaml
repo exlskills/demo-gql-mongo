@@ -1,0 +1,11 @@
+- _id: 1E4Yo11Y3r9a
+  full_name: Jane Doe
+  username: jane01
+  primary_email: jd@example.com
+  primary_locale: en
+
+- _id: 1Eg6d1aFL8s7
+  full_name: John Public
+  username: john01
+  primary_email: jp@example.com
+  primary_locale: en

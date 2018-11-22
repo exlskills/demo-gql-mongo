@@ -1,21 +1,14 @@
+import { toGlobalId } from 'graphql-relay';
 import * as UserCud from '../db-handlers/user/user-cud';
 import { logger } from '../utils/logger';
 
-export const updateUserProfile = async (locale, profile, viewer) => {
+export const createUser = async (user_data, viewer, info) => {
+  logger.debug(`in createUser mag`);
   try {
-    await UserCud.updateUserProfile(locale, profile);
-    return { completionObj: { code: '0', msg: '' } };
+    const user_id_db = await UserCud.createUser(user_data);
+    const user_id = toGlobalId('User', user_id_db);
+    return { user_id: user_id, completionObj: { code: '0', msg: '' } };
   } catch (error) {
     return { completionObj: { code: '1', msg: error.message } };
-  }
-};
-
-export const updateUserUnitStatus = async (unit_id, course_id, viewer) => {
-  logger.debug(`in =====> updateUserUnitStatus`);
-  try {
-    // TODO - FUTURE this is not currently updating anything
-    return { completionObj: { code: '0', msg: '' } };
-  } catch (err) {
-    return { completionObj: { code: '1', msg: err.message } };
   }
 };

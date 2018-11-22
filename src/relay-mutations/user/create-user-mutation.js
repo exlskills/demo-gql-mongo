@@ -9,7 +9,8 @@ import {
 import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
 
 import { CompletionObjType } from '../../relay-models/completion-obj-type';
-import { addUser } from '../../relay-mutate-and-get/user-mag';
+import { createUser } from '../../relay-mutate-and-get/user-mag';
+import { logger } from '../../utils/logger';
 
 const UserInputType = new GraphQLInputObjectType({
   name: 'UserInput',
@@ -23,18 +24,19 @@ const UserInputType = new GraphQLInputObjectType({
 });
 
 export default mutationWithClientMutationId({
-  name: 'AddUser',
+  name: 'CreateUser',
   inputFields: {
-    locale: {
-      type: GraphQLString
-    },
-    profile: {
+    user_data: {
       type: UserInputType
     }
   },
   outputFields: {
+    user_id: { type: GraphQLID },
     completionObj: { type: CompletionObjType }
   },
-  mutateAndGetPayload: ({ locale, profile }, viewer, info) =>
-    addUser(locale, profile).then(returnObj => returnObj)
+  mutateAndGetPayload: ({ user_data }, viewer, info) => {
+    logger.debug(`in mutateAndGetPayload Create User `);
+    logger.debug(`  user_data ` + JSON.stringify(user_data));
+    return createUser(user_data, viewer, info).then(returnObj => returnObj);
+  }
 });

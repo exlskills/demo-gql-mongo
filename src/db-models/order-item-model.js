@@ -7,10 +7,6 @@ export default new mongoose.Schema(
       default: new mongoose.Types.ObjectId(),
       auto: true
     },
-    item_options: {
-      type: Object,
-      default: {}
-    },
     item_id: {
       type: String,
       required: true,
@@ -18,13 +14,15 @@ export default new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      required: true,
-      default: 1
+      required: true
     },
     amount: {
       type: Number,
-      required: true,
-      default: 0
+      required: true
+    },
+    item_details: {
+      type: Object,
+      default: {}
     }
   },
   {

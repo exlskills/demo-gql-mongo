@@ -1,5 +1,7 @@
 import userMutations from './user';
+import orderMutations from './order';
 
 export default {
-  addUserProfile: userMutations.addUser
+  createUser: userMutations.createUser,
+  createOrder: orderMutations.createOrder
 };

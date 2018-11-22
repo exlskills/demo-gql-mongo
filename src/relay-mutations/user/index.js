@@ -1,5 +1,5 @@
-import addUser from './add-user-mutation';
+import createUser from './create-user-mutation';
 
 export default {
-  addUser
+  createUser
 };

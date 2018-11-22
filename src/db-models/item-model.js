@@ -8,12 +8,16 @@ const ItemSchema = new mongoose.Schema(
       type: String,
       default: id_gen
     },
+    desc: {
+      type: String,
+      required: true
+    },
     item_category: {
       type: String,
       required: true,
       index: true
     },
-    item_options: {
+    item_details: {
       type: Object,
       default: {}
     },

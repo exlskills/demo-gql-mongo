@@ -1,0 +1,104 @@
+input AddUserInput {
+  locale: String
+  profile: UserInput
+  clientMutationId: String
+}
+
+type AddUserPayload {
+  completionObj: CompletionObj
+  clientMutationId: String
+}
+
+"""Operation Completion Report"""
+type CompletionObj {
+  code: String
+  msg: String
+  msg_id: String
+  processed: Int
+  modified: Int
+}
+
+input FilterValues {
+  filterValuesString: String
+}
+
+type Mutation {
+  addUserProfile(input: AddUserInput!): AddUserPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+input OrderBy {
+  field: String
+  direction: OrderByDirection
+}
+
+enum OrderByDirection {
+  DESC
+  ASC
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  """Users"""
+  listUsers(orderBy: [OrderBy], filterValues: FilterValues, resolverArgs: [QueryResolverArgs], instructorTopics: [String], after: String, first: Int, before: String, last: Int): UserConnection
+}
+
+input QueryResolverArgs {
+  param: String
+  value: String
+}
+
+"""Application user"""
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+  full_name: String
+  username: String
+  primary_email: String
+  primary_locale: String!
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge"""
+  node: User
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""User"""
+input UserInput {
+  full_name: String
+  username: String!
+  primary_email: String!
+  primary_locale: String
+}

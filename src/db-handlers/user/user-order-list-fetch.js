@@ -1,16 +1,18 @@
 import { logger } from '../../utils/logger';
-import User from '../../db-models/user-model';
+import UserOrder from '../../db-models/user-order-model';
 
-export const fetchUserList = async (
+export const fetchUserOrderList = async (
   filterValues,
   aggregateArray,
   viewerLocale,
   fetchParameters
 ) => {
-  logger.debug(`in fetchUserList`);
+  logger.debug(`in fetchUserOrderList`);
   logger.debug(`   aggregateArray ` + JSON.stringify(aggregateArray));
 
-  let queryFunc = User.find();
+  let queryFunc = UserOrder.find({ user_id: fetchParameters.user_id }).select({
+    order_items: 0
+  });
 
   const sort = aggregateArray.find(item => !!item.$sort);
   if (sort) {
@@ -25,11 +27,11 @@ export const fetchUserList = async (
     queryFunc = queryFunc.limit(limit.$limit);
   }
 
-  let userArray;
+  let userOrderArray;
   try {
-    userArray = await queryFunc.exec();
+    userOrderArray = await queryFunc.exec();
   } catch (err) {}
-  logger.debug(`  userArray ` + userArray);
+  logger.debug(`  userOrderArray ` + userOrderArray);
 
-  return userArray;
+  return userOrderArray;
 };

@@ -1,16 +1,17 @@
 import { logger } from '../utils/logger';
 import { connectionFromDataSource } from '../paging-processor/connection-from-datasource';
-import { fetchUserList } from '../db-handlers/user/user-list-fetch';
+import { fetchOrderItemList } from '../db-handlers/order/order-item-list-fetch';
 
-export const resolveListUsers = async (obj, args, viewer, info) => {
-  logger.debug(`in resolveListUsers`);
+export const resolveListOrderItems = async (obj, args, viewer, info) => {
+  logger.debug(`in resolveListOrderItems`);
   logger.debug(` args ` + JSON.stringify(args));
+  logger.debug(` obj ` + JSON.stringify(obj));
 
   const businessKey = '_id';
-  const fetchParameters = {};
+  const fetchParameters = { _id: obj._id };
 
   const execDetails = {
-    queryFunction: fetchUserList,
+    queryFunction: fetchOrderItemList,
     businessKey: businessKey,
     fetchParameters: fetchParameters
   };

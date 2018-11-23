@@ -1,12 +1,12 @@
-import { UserConnection } from '../../relay-models/user-type';
+import { UserOrderConnection } from '../../relay-models/user-order-type';
 import * as inputTypes from '../input-types-get-query';
 import { connectionArgs } from 'graphql-relay';
-import { GraphQLList, GraphQLString } from 'graphql';
-import { resolveListUsers } from '../../relay-resolvers/user-resolver';
+import { GraphQLList, GraphQLString, GraphQLNonNull, GraphQLID } from 'graphql';
+import { resolveListUserOrders } from '../../relay-resolvers/user-order-resolver';
 
-export const listUsers = {
-  type: UserConnection,
-  description: 'Users',
+export const listUserOrders = {
+  type: UserOrderConnection,
+  description: 'User Orders',
   args: {
     orderBy: {
       type: inputTypes.OrderByType
@@ -20,8 +20,11 @@ export const listUsers = {
     instructorTopics: {
       type: new GraphQLList(GraphQLString)
     },
+    user_id: {
+      type: new GraphQLNonNull(GraphQLID)
+    },
     ...connectionArgs
   },
   resolve: (obj, args, viewer, info) =>
-    resolveListUsers(obj, args, viewer, info)
+    resolveListUserOrders(obj, args, viewer, info)
 };

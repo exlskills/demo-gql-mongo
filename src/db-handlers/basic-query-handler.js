@@ -23,7 +23,7 @@ export async function basicFind(
   sortVal,
   selectVal
 ) {
-  let result, queryFunc;
+  let queryFunc;
 
   if (runParams && queryVal) {
     if (runParams.isById) {

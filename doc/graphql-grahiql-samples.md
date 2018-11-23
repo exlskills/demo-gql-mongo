@@ -2,7 +2,78 @@
  
 `http://<GQL server host>:<GQL server port>/graph`, e.g., `http://localhost:8080/graph` 
 
+## Queries 
+
+### List Users
+```
+query listUsers {
+  listUsers(first: 3, orderBy: [{field:"full_name",direction:ASC}]) {
+    edges {
+      node {
+        id
+        full_name
+        username
+        primary_email
+        primary_locale
+      }
+    }
+  }
+}
+```
+
+### List User Orders
+```
+query listUserOrders {
+  listUserOrders(user_id: "VXNlcjoxRTRZbzExWTNyOWE=", first: 3, orderBy: [{field: "order_date", direction: ASC}]) {
+    edges {
+      node {
+        id
+        payer_id
+        order_date
+        order_items {
+          edges {
+            node {
+              item_id
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Mutations 
+
+### Create User
+```
+mutation sendUser($user_data_input: CreateUserInput!) {
+  createUser(input: $user_data_input) {
+    user_id
+    completionObj {
+      code
+      msg_id
+      msg
+      processed
+      modified
+    }
+  }
+}
+```
+
+#### Variables 
+```json
+{
+  "user_data_input": {
+    "user_data": {
+      "full_name": "Super User",
+      "username": "s_user",
+      "primary_email": "super@example.com",
+      "primary_locale": "en" 
+    }
+  }
+}
+```
 
 ### Create Order
 ```
@@ -13,6 +84,8 @@ mutation sendOrder($order_data_input: CreateOrderInput!) {
       code
       msg_id
       msg
+      processed
+      modified      
     }
   }
 }

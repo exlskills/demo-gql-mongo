@@ -70,7 +70,7 @@
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-prettier": "^2.1.2",
-    "nodemon": "^1.18.3",
+    "nodemon": "1.18.3",
     "prettier": "^1.14.2"
   }
 }

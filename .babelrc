@@ -4,7 +4,6 @@
     "stage-0"
   ],
   "plugins": [
-    "relay",
     ["transform-runtime", {
       "helpers": false,
       "polyfill": false,

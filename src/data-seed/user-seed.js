@@ -5,7 +5,7 @@ import * as fs from 'fs-extra';
 import path from 'path';
 import * as yaml from 'js-yaml';
 import User from '../db-models/user-model';
-import config from '../config/index';
+import config from '../config';
 import { logger } from '../utils/logger';
 
 async function loadData() {

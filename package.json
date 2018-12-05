@@ -11,23 +11,19 @@
     "prettier": "prettier --write \"{*.js,!(node*)**/*.js}\"",
     "build": "babel src -d build --copy-files && npm run build:copy",
     "build:copy": "copyfiles package.json ./build",
-    "lint-fix": "eslint --fix .",
-    "docker:build": "docker build -t exlskills/gql-server:latest .",
-    "docker:push": "docker push exlskills/gql-server:latest"
+    "lint-fix": "eslint --fix ."
   },
   "betterScripts": {
     "start-prod": {
       "command": "node build/server.js",
       "env": {
-        "NODE_ENV": "production",
-        "PORT": 80
+        "NODE_ENV": "production"
       }
     },
     "start-dev": {
       "command": "nodemon -w src/server.js --exec \"babel-node src/server.js\"",
       "env": {
-        "NODE_ENV": "development",
-        "PORT": 80
+        "NODE_ENV": "development"
       }
     }
   },

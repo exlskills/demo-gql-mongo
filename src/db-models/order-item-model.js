@@ -4,8 +4,8 @@ export default new mongoose.Schema(
   {
     _id: {
       type: mongoose.Schema.Types.ObjectId,
-      default: new mongoose.Types.ObjectId(),
-      auto: true
+      auto: true,
+      index: true
     },
     item_id: {
       type: String,

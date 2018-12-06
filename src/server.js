@@ -1,6 +1,5 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import chokidar from 'chokidar';
 import cors from 'cors';
 import express from 'express';
 import graphQLHTTP from 'express-graphql';
@@ -120,13 +119,5 @@ function startServers(callback) {
   }
   startGraphQLServer(handleTaskDone);
 }
-
-const watcher = chokidar.watch('/{database,schema}.js');
-watcher.on('change', path => {
-  logger.debug(`\`${path}\` changed. Restarting.`);
-  startServers(() =>
-    logger.debug('Restart your browser to use the updated schema.')
-  );
-});
 
 startServers();

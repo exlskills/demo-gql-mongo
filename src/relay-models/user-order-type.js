@@ -1,9 +1,4 @@
-import {
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString
-} from 'graphql';
+import { GraphQLObjectType } from 'graphql';
 
 import {
   connectionArgs,

@@ -30,10 +30,15 @@ query listUserOrders {
         id
         payer_id
         order_date
-        order_items {
+        order_items (first: 10) {
           edges {
             node {
               item_id
+              desc
+              quantity
+              amount
+              item_category
+              item_details
             }
           }
         }

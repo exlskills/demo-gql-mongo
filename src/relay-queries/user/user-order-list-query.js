@@ -1,7 +1,7 @@
 import { UserOrderConnection } from '../../relay-models/user-order-type';
 import * as inputTypes from '../input-types-get-query';
 import { connectionArgs } from 'graphql-relay';
-import { GraphQLList, GraphQLString, GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
 import { resolveListUserOrders } from '../../relay-resolvers/user-order-resolver';
 
 export const listUserOrders = {
@@ -16,9 +16,6 @@ export const listUserOrders = {
     },
     resolverArgs: {
       type: inputTypes.QueryResolverArgsType
-    },
-    instructorTopics: {
-      type: new GraphQLList(GraphQLString)
     },
     user_id: {
       type: new GraphQLNonNull(GraphQLID)

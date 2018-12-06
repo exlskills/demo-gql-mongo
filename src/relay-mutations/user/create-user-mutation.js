@@ -1,12 +1,11 @@
 import {
   GraphQLID,
   GraphQLInputObjectType,
-  GraphQLList,
   GraphQLNonNull,
   GraphQLString
 } from 'graphql';
 
-import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
+import { mutationWithClientMutationId } from 'graphql-relay';
 
 import { CompletionObjType } from '../../relay-models/completion-obj-type';
 import { createUser } from '../../relay-mutate-and-get/user-mag';

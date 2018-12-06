@@ -1,10 +1,4 @@
-import {
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLFloat
-} from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLFloat } from 'graphql';
 
 import { connectionDefinitions, globalIdField } from 'graphql-relay';
 

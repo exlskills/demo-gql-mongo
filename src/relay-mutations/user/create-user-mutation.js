@@ -31,9 +31,13 @@ export default mutationWithClientMutationId({
     user_id: { type: GraphQLID },
     completionObj: { type: CompletionObjType }
   },
-  mutateAndGetPayload: ({ user_data }, viewer, info) => {
+  mutateAndGetPayload: (inputFields, viewer, info) => {
     logger.debug(`in mutateAndGetPayload Create User `);
-    logger.debug(`  user_data ` + JSON.stringify(user_data));
-    return createUser(user_data, viewer, info).then(returnObj => returnObj);
+    logger.debug(`  inputFields ` + JSON.stringify(inputFields));
+    logger.debug(`  viewer ` + JSON.stringify(viewer));
+    logger.debug(`  info ` + JSON.stringify(info));
+    return createUser(inputFields.user_data, viewer, info).then(
+      returnObj => returnObj
+    );
   }
 });

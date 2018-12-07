@@ -47,13 +47,16 @@ export default mutationWithClientMutationId({
     order_id: { type: GraphQLID },
     completionObj: { type: CompletionObjType }
   },
-  mutateAndGetPayload: ({ order_data }, viewer, info) => {
+  mutateAndGetPayload: (inputFields, viewer, info) => {
     logger.debug(`in mutateAndGetPayload Create Order `);
-    logger.debug(`  order_data ` + JSON.stringify(order_data));
-    const orderObj = { order_date: order_data.order_date, order_items: [] };
-    orderObj.user_id = fromGlobalId(order_data.user_id).id;
-    orderObj.payer_id = fromGlobalId(order_data.payer_id).id;
-    for (let item of order_data.order_items) {
+    logger.debug(`  inputFields ` + JSON.stringify(inputFields));
+    const orderObj = {
+      order_date: inputFields.order_data.order_date,
+      order_items: []
+    };
+    orderObj.user_id = fromGlobalId(inputFields.order_data.user_id).id;
+    orderObj.payer_id = fromGlobalId(inputFields.order_data.payer_id).id;
+    for (let item of inputFields.order_data.order_items) {
       const itemObj = { ...item };
       itemObj.item_id = fromGlobalId(item.item_id).id;
       orderObj.order_items.push(itemObj);

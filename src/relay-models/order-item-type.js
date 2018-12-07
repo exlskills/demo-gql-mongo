@@ -1,7 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLFloat } from 'graphql';
-
 import { connectionDefinitions, globalIdField } from 'graphql-relay';
-
 import { NodeInterface } from './node-definitions-type';
 
 export const OrderItemType = new GraphQLObjectType({

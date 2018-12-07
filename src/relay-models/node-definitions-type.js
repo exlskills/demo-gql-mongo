@@ -1,5 +1,4 @@
 import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
-
 import * as User from '../db-handlers/user/user-fetch';
 
 /**

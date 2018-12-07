@@ -1,10 +1,10 @@
-var PREFIX = 'mongo:';
-var POSTFIX1 = '|';
-var POSTFIX2 = '|';
-
 import { findWithPaging } from './find-with-paging';
 import { getValueByPathToKey } from '../utils/paging-utils';
 import { logger } from '../utils/logger';
+
+const PREFIX = 'mongo:';
+const POSTFIX1 = '|';
+const POSTFIX2 = '|';
 
 export function connectionFromDataSource(
   execDetails,

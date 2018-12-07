@@ -4,9 +4,7 @@ import {
   GraphQLNonNull,
   GraphQLString
 } from 'graphql';
-
 import { mutationWithClientMutationId } from 'graphql-relay';
-
 import { CompletionObjType } from '../../relay-models/completion-obj-type';
 import { createUser } from '../../relay-mutate-and-get/user-mag';
 import { logger } from '../../utils/logger';

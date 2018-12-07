@@ -1,6 +1,6 @@
+import { toGlobalId } from 'graphql-relay';
 import * as OrderCud from '../db-handlers/order/order-cud';
 import { logger } from '../utils/logger';
-import { toGlobalId } from 'graphql-relay';
 
 export const createOrder = async (orderObj, viewer, info) => {
   logger.debug(`in order-mag createOrder`);

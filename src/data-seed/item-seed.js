@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import * as fs from 'fs-extra';
 import path from 'path';
 import * as yaml from 'js-yaml';
-import Item from '../db-models/item-model';
 import config from '../config';
+import Item from '../db-models/item-model';
 import { logger } from '../utils/logger';
 
 async function loadData() {

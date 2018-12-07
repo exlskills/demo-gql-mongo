@@ -1,11 +1,9 @@
 import { GraphQLObjectType } from 'graphql';
-
 import {
   connectionArgs,
   connectionDefinitions,
   globalIdField
 } from 'graphql-relay';
-
 import { NodeInterface } from './node-definitions-type';
 import { GraphQLDateTime } from 'graphql-iso-date';
 import { OrderItemConnection } from './order-item-type';

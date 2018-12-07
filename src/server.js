@@ -85,7 +85,7 @@ function startGraphQLServer(callback) {
 
   graphQLApp.use(
     '/graph',
-    // middleware.getViewer,
+    middleware.getViewer,
     // middleware.loginRequired,
     graphQLHTTP((request, response, graphQLParams) => ({
       ...graphQLHTTPOpts,

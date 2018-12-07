@@ -21,6 +21,11 @@ export const getViewer = (req, res, next) => {
       user_id: decoded.user_id,
       locale: decoded.locale
     };
+  } else if (process.env.NODE_ENV !== 'production') {
+    req.gqlviewer = {
+      user_id: '1E4Yo11Y3r9a',
+      locale: 'en'
+    };
   }
 
   if (req.gqlviewer) {

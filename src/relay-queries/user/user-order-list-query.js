@@ -1,7 +1,7 @@
-import { UserOrderConnection } from '../../relay-models/user-order-type';
-import * as inputTypes from '../input-types-get-query';
-import { connectionArgs } from 'graphql-relay';
 import { GraphQLNonNull, GraphQLID } from 'graphql';
+import { connectionArgs } from 'graphql-relay';
+import * as inputTypes from '../input-types-get-query';
+import { UserOrderConnection } from '../../relay-models/user-order-type';
 import { resolveListUserOrders } from '../../relay-resolvers/user-order-resolver';
 
 export const listUserOrders = {

@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
@@ -50,6 +49,8 @@ function startGraphQLServer(callback) {
 
   const graphQLApp = express();
 
+  graphQLApp.use('/healthcheck', require('express-healthcheck')());
+
   graphQLApp.use(
     cors({
       origin: config.cors_origin,
@@ -57,17 +58,7 @@ function startGraphQLServer(callback) {
     })
   );
 
-  graphQLApp.use('/healthcheck', require('express-healthcheck')());
-
   graphQLApp.use(cookieParser());
-
-  graphQLApp.use(
-    bodyParser.urlencoded({
-      extended: true
-    })
-  );
-
-  graphQLApp.use(bodyParser.json());
 
   const graphQLHTTPOpts = {
     graphiql: true,

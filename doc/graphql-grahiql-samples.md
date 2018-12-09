@@ -16,6 +16,13 @@ query listUsers {
         primary_email
         primary_locale
       }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
     }
   }
 }

@@ -21,7 +21,7 @@ export const {
       default:
         return null;
     }
-    // TODO add the other objects once we have a way to manage permissions for getting these...
+    // TODO add the other objects
     return modelType.fetchById(id);
   },
   obj => {}

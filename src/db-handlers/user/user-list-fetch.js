@@ -28,7 +28,10 @@ export const fetchUserList = async (
   let userArray;
   try {
     userArray = await queryFunc.exec();
-  } catch (err) {}
+  } catch (err) {
+    logger.error(`in fetchUserList exec: ` + err);
+    throw new Error(`query failed`);
+  }
   logger.debug(`  userArray ` + userArray);
 
   return userArray;

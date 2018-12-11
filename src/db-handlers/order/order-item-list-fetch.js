@@ -82,7 +82,7 @@ export const fetchOrderItemList = async (
         quantity: 1,
         amount: 1,
         item_details_as_ordered: 1,
-        desc: '$item.item_desc',
+        desc: '$item.desc',
         item_category: '$item.item_category',
         item_details_base: '$item.item_details'
       }

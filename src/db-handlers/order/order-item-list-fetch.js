@@ -11,26 +11,27 @@ export const fetchOrderItemList = async (
   logger.debug(`   aggregateArray ` + JSON.stringify(aggregateArray));
 
   let elem,
-    array = [];
+    agrArray = [];
   try {
     elem = {
       $match: {
         _id: fetchParameters._id
       }
     };
-    array.push(elem);
+    agrArray.push(elem);
+
     elem = {
       $project: {
         _id: 0,
         order_items: 1
       }
     };
-    array.push(elem);
+    agrArray.push(elem);
 
     elem = {
       $unwind: '$order_items'
     };
-    array.push(elem);
+    agrArray.push(elem);
 
     elem = {
       $project: {
@@ -40,7 +41,7 @@ export const fetchOrderItemList = async (
         item_details_as_ordered: '$order_items.item_details'
       }
     };
-    array.push(elem);
+    agrArray.push(elem);
 
     let array_lookup = [];
     elem = {
@@ -69,12 +70,12 @@ export const fetchOrderItemList = async (
         as: 'item'
       }
     };
+    agrArray.push(elem);
 
-    array.push(elem);
     elem = {
       $unwind: '$item'
     };
-    array.push(elem);
+    agrArray.push(elem);
 
     elem = {
       $project: {
@@ -87,17 +88,17 @@ export const fetchOrderItemList = async (
         item_details_base: '$item.item_details'
       }
     };
-    array.push(elem);
+    agrArray.push(elem);
 
     const sort = aggregateArray.find(item => !!item.$sort);
-    if (sort) {
-      array.push(sort);
-    }
+    if (sort) agrArray.push(sort);
+
     const skip = aggregateArray.find(item => !!item.$skip);
-    if (skip) array.push(skip);
+    if (skip) agrArray.push(skip);
 
     const limit = aggregateArray.find(item => !!item.$limit);
-    if (limit) array.push(limit);
+    if (limit) agrArray.push(limit);
+
   } catch (err) {
     logger.error(`in UserOrder aggregate pipeline build ` + err);
     throw new Error(`query failed`);
@@ -105,7 +106,7 @@ export const fetchOrderItemList = async (
 
   let orderItemArray;
   try {
-    orderItemArray = await UserOrder.aggregate(array).exec();
+    orderItemArray = await UserOrder.aggregate(agrArray).exec();
   } catch (err) {
     logger.error(`in UserOrder aggregate ` + err);
     throw new Error(`query failed`);

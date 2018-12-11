@@ -100,7 +100,7 @@ export const fetchOrderItemList = async (
     if (limit) array.push(limit);
   } catch (err) {
     logger.error(`in UserOrder aggregate pipeline build ` + err);
-    return [];
+    throw new Error(`query failed`);
   }
 
   let orderItemArray;
@@ -108,7 +108,7 @@ export const fetchOrderItemList = async (
     orderItemArray = await UserOrder.aggregate(array).exec();
   } catch (err) {
     logger.error(`in UserOrder aggregate ` + err);
-    return [];
+    throw new Error(`query failed`);
   }
 
   logger.debug(`  orderItemArray raw ` + JSON.stringify(orderItemArray));
@@ -124,7 +124,7 @@ export const fetchOrderItemList = async (
     }
   } catch (err) {
     logger.error(`in orderItem details processing ` + err);
-    return [];
+    throw new Error(`query failed`);
   }
 
   logger.debug(`  orderItemArray updated ` + JSON.stringify(orderItemArray));

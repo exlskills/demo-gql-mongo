@@ -30,7 +30,10 @@ export const fetchUserOrderList = async (
   let userOrderArray;
   try {
     userOrderArray = await queryFunc.exec();
-  } catch (err) {}
+  } catch (err) {
+    logger.error(`in fetchUserOrderList exec: ` + err);
+    throw new Error(`query failed`);
+  }
   logger.debug(`  userOrderArray ` + userOrderArray);
 
   return userOrderArray;

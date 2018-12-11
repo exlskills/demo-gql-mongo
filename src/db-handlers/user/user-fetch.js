@@ -17,7 +17,7 @@ export const fetchById = async (obj_id, selectVal, viewer, info) => {
       selectVal
     );
   } catch (errInternalAlreadyReported) {
-    return null;
+    throw new Error(`query failed`);
   }
   return record;
 };
@@ -37,7 +37,7 @@ export const fetchByKey = async (queryVal, selectVal, viewer, info) => {
       selectVal
     );
   } catch (errInternalAlreadyReported) {
-    return null;
+    throw new Error(`query failed`);
   }
   return record;
 };

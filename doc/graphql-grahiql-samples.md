@@ -55,6 +55,23 @@ query listUserOrders {
 }
 ```
 
+### Get Item
+```
+query getItem {
+  getItem(item_id: "SXRlbToxR1ZsMjFscTBTOHA=") {
+    id
+    desc
+    item_category
+    item_price {
+      amount
+      discount_schema
+      valid_from
+      valid_to
+    }
+  }
+}
+```
+
 ## Mutations 
 
 ### Create User

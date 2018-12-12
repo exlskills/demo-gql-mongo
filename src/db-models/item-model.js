@@ -22,7 +22,7 @@ const ItemSchema = new mongoose.Schema(
       default: {}
     },
     item_price: {
-      type: ItemPrice,
+      type: [ItemPrice],
       required: true
     }
   },

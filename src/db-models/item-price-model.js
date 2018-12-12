@@ -6,6 +6,17 @@ export default new mongoose.Schema(
     amount: {
       type: Number,
       required: true
+    },
+    discount_schema: {
+      type: String,
+      default: 'Volume'
+    },
+    valid_from: {
+      type: Date,
+      default: new Date(Date.UTC(2018, 1, 1))
+    },
+    valid_to: {
+      type: Date
     }
   },
   {

@@ -1,4 +1,4 @@
-import { GraphQLID } from 'graphql';
+import { GraphQLID, GraphQLNonNull } from 'graphql';
 import { resolveItem } from '../../relay-resolvers/item-resolver';
 import { ItemType } from '../../relay-models/item-type';
 
@@ -6,8 +6,8 @@ export const getItem = {
   type: ItemType,
   args: {
     item_id: {
-      type: GraphQLID
+      type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: resolveItem
+  resolve: (obj, args, viewer, info) => resolveItem(obj, args, viewer, info)
 };

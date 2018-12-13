@@ -6,6 +6,17 @@ export const resolveItem = async (obj, args, viewer, info) => {
   logger.debug(`in resolveItem`);
   logger.debug(` args ` + JSON.stringify(args));
 
+  logger.debug(` info.fieldNodes ` + JSON.stringify(info.fieldNodes));
+  if (
+    info.fieldNodes &&
+    info.fieldNodes.length > 0 &&
+    info.fieldNodes[0].selectionSet
+  ) {
+    for (let fld of info.fieldNodes[0].selectionSet.selections) {
+      logger.debug(` field ` + JSON.stringify(fld));
+    }
+  }
+
   let itemId;
   if (obj && obj.item_id) {
     itemId = obj.item_id;

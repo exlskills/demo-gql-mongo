@@ -61,6 +61,6 @@ export default mutationWithClientMutationId({
       itemObj.item_id = fromGlobalId(item.item_id).id;
       orderObj.order_items.push(itemObj);
     }
-    return createOrder(orderObj, viewer).then(returnObj => returnObj);
+    return createOrder(orderObj, viewer);
   }
 });

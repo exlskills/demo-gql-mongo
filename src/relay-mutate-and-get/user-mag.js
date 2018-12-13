@@ -4,8 +4,10 @@ import { logger } from '../utils/logger';
 import { basicFind } from '../db-handlers/basic-query-handler';
 import User from '../db-models/user-model';
 
-export const createUser = async (user_data, viewer, info) => {
+export const createUser = async (inputFields, viewer, info) => {
   logger.debug(`in createUser mag`);
+
+  const user_data = inputFields.user_data;
   logger.debug(`user data ` + JSON.stringify(user_data));
 
   try {

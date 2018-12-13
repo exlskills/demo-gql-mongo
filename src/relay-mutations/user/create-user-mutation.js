@@ -36,8 +36,6 @@ export default mutationWithClientMutationId({
     logger.debug(`  inputFields ` + JSON.stringify(inputFields));
     logger.debug(`  viewer ` + JSON.stringify(viewer));
     logger.debug(`  info ` + JSON.stringify(info));
-    return createUser(inputFields.user_data, viewer, info).then(
-      returnObj => returnObj
-    );
+    return createUser(inputFields, viewer, info);
   }
 });

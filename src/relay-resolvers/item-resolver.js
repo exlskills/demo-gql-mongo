@@ -2,7 +2,7 @@ import { logger } from '../utils/logger';
 import { fetchById } from '../db-handlers/item-fetch';
 import { fromGlobalId } from 'graphql-relay';
 
-export const resolveItem = async (obj, args, viewer, info) => {
+export const resolveGetItem = async (obj, args, viewer, info) => {
   logger.debug(`in resolveItem`);
   logger.debug(` args ` + JSON.stringify(args));
 

@@ -72,6 +72,18 @@ query getItem {
 }
 ```
 
+### Get User
+```
+query getUser {
+  getUser(item_query: "{\"full_name\": \"John Public\"}") {
+    id
+    username
+    full_name
+  }
+}
+
+```
+
 ## Mutations 
 
 ### Create User

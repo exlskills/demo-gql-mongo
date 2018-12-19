@@ -32,4 +32,7 @@ const UserOrderSchema = new mongoose.Schema(
   }
 );
 
+UserOrderSchema.index({ user_id: 1, payer_id: 1 });
+UserOrderSchema.index({ user_id: 1, order_date: -1 });
+
 export default mongoose.model('UserOrder', UserOrderSchema, 'user_order');

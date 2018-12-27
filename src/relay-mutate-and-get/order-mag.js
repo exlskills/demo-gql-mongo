@@ -43,11 +43,12 @@ export const createOrder = async (orderObj, viewer, info) => {
       }
     };
   } catch (error) {
+    const msg = error.message ? error.message : error;
     return {
       completionObj: {
         code: '1',
         msg_id: 'EO01',
-        msg: error.message,
+        msg: msg,
         processed: 0,
         modified: 0
       }

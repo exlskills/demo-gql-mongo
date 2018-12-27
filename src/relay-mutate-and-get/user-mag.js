@@ -23,7 +23,6 @@ export const createUser = async (inputFields, viewer, info) => {
         msg: 'Primary email found in another existing profile'
       }
     ];
-    /*
     for (let condition of conditionsToCheck) {
       let user_rec;
       try {
@@ -49,7 +48,7 @@ export const createUser = async (inputFields, viewer, info) => {
         };
       }
     }
-*/
+
     const user_id_db = await UserCud.createUser(user_data);
     const user_id = toGlobalId('User', user_id_db);
     return {
@@ -63,11 +62,12 @@ export const createUser = async (inputFields, viewer, info) => {
       }
     };
   } catch (error) {
+    const msg = error.message ? error.message : error;
     return {
       completionObj: {
         code: '1',
         msg_id: 'EU01',
-        msg: error.message,
+        msg: msg,
         processed: 0,
         modified: 0
       }

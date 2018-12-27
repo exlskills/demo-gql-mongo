@@ -6,6 +6,10 @@ import { basicFind } from '../basic-query-handler';
 export const createUser = async user_data => {
   logger.debug(`in createUser`);
   let user_id = id_gen();
+
+  // Uncomment to test ID regeneration functionality
+  // user_id = '1E4Yo11Y3r9a';
+
   while (true) {
     let user_rec = null;
     try {
@@ -18,7 +22,10 @@ export const createUser = async user_data => {
         null,
         { _id: 1 }
       );
-    } catch (alreadyRecorded) {}
+    } catch (alreadyRecorded) {
+      // Getting out of the loop
+      return Promise.reject('Error creating User');
+    }
     if (!user_rec || !user_rec._id) {
       logger.debug(`assigned User id ` + user_id);
       break;

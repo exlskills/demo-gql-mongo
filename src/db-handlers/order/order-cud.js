@@ -1,4 +1,3 @@
-import { basicFind } from '../basic-query-handler';
 import UserOrder from '../../db-models/user-order-model';
 import { id_gen } from '../../utils/url-id-generator';
 import { logger } from '../../utils/logger';
@@ -6,35 +5,30 @@ import { logger } from '../../utils/logger';
 export const createOrder = async order_data => {
   logger.debug(`in createOrder`);
   let order_id = id_gen();
+
+  // Uncomment to test ID regeneration functionality
+  // order_id = '1UtNnZBYUHDx';
+
   while (true) {
-    let order_rec = null;
+    const orderObject = { _id: order_id, ...order_data };
+    logger.debug(JSON.stringify(orderObject));
+
     try {
-      order_rec = await basicFind(
-        UserOrder,
-        {
-          isById: true
-        },
-        order_id,
-        null,
-        { _id: 1 }
-      );
-    } catch (alreadyRecorded) {}
-    if (!order_rec || !order_rec._id) {
-      logger.debug(`assigned Order id ` + order_id);
-      break;
-    } else {
-      order_id = id_gen();
+      await UserOrder.create(orderObject);
+    } catch (err) {
+      if (
+        err.message.indexOf(order_id) !== -1 &&
+        err.message.indexOf('duplicate key error') !== -1
+      ) {
+        logger.debug(err.message);
+        order_id = id_gen();
+        continue;
+      } else {
+        logger.error('While Creating Order ' + err);
+        return Promise.reject('Error creating Order', err);
+      }
     }
-  }
-  const orderObject = { _id: order_id, ...order_data };
-
-  logger.debug(JSON.stringify(orderObject));
-
-  try {
-    await UserOrder.create(orderObject);
     logger.debug('Order created with id ' + order_id);
     return order_id;
-  } catch (err) {
-    return Promise.reject('Error creating Order', err);
   }
 };

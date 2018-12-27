@@ -15,11 +15,13 @@ const UserSchema = new mongoose.Schema(
     },
     username: {
       type: String,
-      index: true
+      index: true,
+      unique: true
     },
     primary_email: {
       type: String,
-      index: true
+      index: true,
+      unique: true
     },
     primary_locale: {
       type: String,

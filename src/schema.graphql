@@ -1,14 +1,3 @@
-input AddUserInput {
-  locale: String
-  profile: UserInput
-  clientMutationId: String
-}
-
-type AddUserPayload {
-  completionObj: CompletionObj
-  clientMutationId: String
-}
-
 """Operation Completion Report"""
 type CompletionObj {
   code: String
@@ -18,12 +7,60 @@ type CompletionObj {
   modified: Int
 }
 
+input CreateOrderInput {
+  order_data: OrderInput
+  clientMutationId: String
+}
+
+type CreateOrderPayload {
+  order_id: ID
+  completionObj: CompletionObj
+  clientMutationId: String
+}
+
+input CreateUserInput {
+  user_data: UserInput
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  user_id: ID
+  completionObj: CompletionObj
+  clientMutationId: String
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
 input FilterValues {
   filterValuesString: String
 }
 
+"""Item"""
+type Item implements Node {
+  """The ID of an object"""
+  id: ID!
+  desc: String
+  item_category: String
+  item_price: [ItemPriceType]
+  item_details: String
+}
+
+"""Item Price"""
+type ItemPriceType {
+  amount: Float
+  discount_schema: String
+  valid_from: DateTime
+  valid_to: DateTime
+}
+
 type Mutation {
-  addUserProfile(input: AddUserInput!): AddUserPayload
+  createUser(input: CreateUserInput!): CreateUserPayload
+  createOrder(input: CreateOrderInput!): CreateOrderPayload
 }
 
 """An object with an ID"""
@@ -42,6 +79,54 @@ enum OrderByDirection {
   ASC
 }
 
+"""Order"""
+input OrderInput {
+  user_id: ID!
+  payer_id: ID
+  order_date: DateTime
+  order_items: [OrderItemInput]!
+}
+
+"""Order Item"""
+type OrderItem implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """The ID of an object"""
+  item_id: ID!
+  desc: String
+  item_category: String
+  quantity: Float
+  amount: Float
+  item_details: String
+}
+
+"""A connection to a list of items."""
+type OrderItemConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [OrderItemEdge]
+}
+
+"""An edge in a connection."""
+type OrderItemEdge {
+  """The item at the end of the edge"""
+  node: OrderItem
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""OrderItem"""
+input OrderItemInput {
+  item_id: ID!
+  quantity: Float!
+  amount: Float
+  item_details: String
+}
+
 """Information about pagination in a connection."""
 type PageInfo {
   """When paginating forwards, are there more items?"""
@@ -58,8 +143,14 @@ type PageInfo {
 }
 
 type Query {
+  getItem(item_id: ID!): Item
+  getUser(item_query: String!): User
+
   """Users"""
-  listUsers(orderBy: [OrderBy], filterValues: FilterValues, resolverArgs: [QueryResolverArgs], instructorTopics: [String], after: String, first: Int, before: String, last: Int): UserConnection
+  listUsers(orderBy: [OrderBy], filterValues: FilterValues, resolverArgs: [QueryResolverArgs], after: String, first: Int, before: String, last: Int): UserConnection
+
+  """User Orders"""
+  listUserOrders(orderBy: [OrderBy], filterValues: FilterValues, resolverArgs: [QueryResolverArgs], user_id: ID!, after: String, first: Int, before: String, last: Int): UserOrderConnection
 }
 
 input QueryResolverArgs {
@@ -101,4 +192,38 @@ input UserInput {
   username: String!
   primary_email: String!
   primary_locale: String
+}
+
+"""User Order"""
+type UserOrder implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """The ID of an object"""
+  user_id: ID!
+
+  """The ID of an object"""
+  payer_id: ID!
+  order_date: DateTime
+
+  """Order items"""
+  order_items(orderBy: [OrderBy], filterValues: FilterValues, resolverArgs: [QueryResolverArgs], after: String, first: Int, before: String, last: Int): OrderItemConnection
+}
+
+"""A connection to a list of items."""
+type UserOrderConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserOrderEdge]
+}
+
+"""An edge in a connection."""
+type UserOrderEdge {
+  """The item at the end of the edge"""
+  node: UserOrder
+
+  """A cursor for use in pagination"""
+  cursor: String!
 }

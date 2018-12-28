@@ -5,6 +5,7 @@
 ## Queries 
 
 ### List Users
+
 ```
 query listUsers {
   listUsers(first: 3, orderBy: [{field:"full_name",direction:ASC}]) {
@@ -29,6 +30,7 @@ query listUsers {
 ```
 
 ### List User Orders
+
 ```
 query listUserOrders {
   listUserOrders(user_id: "VXNlcjoxRTRZbzExWTNyOWE=", first: 3, orderBy: [{field: "order_date", direction: ASC}]) {
@@ -56,6 +58,7 @@ query listUserOrders {
 ```
 
 ### Get Item
+
 ```
 query getItem {
   getItem(item_id: "SXRlbToxR1ZsMjFscTBTOHA=") {
@@ -73,6 +76,7 @@ query getItem {
 ```
 
 ### Get User
+
 ```
 query getUser {
   getUser(item_query: "{\"full_name\": \"John Public\"}") {
@@ -87,6 +91,7 @@ query getUser {
 ## Mutations 
 
 ### Create User
+
 ```
 mutation sendUser($user_data_input: CreateUserInput!) {
   createUser(input: $user_data_input) {
@@ -103,6 +108,7 @@ mutation sendUser($user_data_input: CreateUserInput!) {
 ```
 
 #### Variables 
+
 ```json
 {
   "user_data_input": {
@@ -117,6 +123,7 @@ mutation sendUser($user_data_input: CreateUserInput!) {
 ```
 
 ### Create Order
+
 ```
 mutation sendOrder($order_data_input: CreateOrderInput!) {
   createOrder(input: $order_data_input) {
@@ -132,7 +139,32 @@ mutation sendOrder($order_data_input: CreateOrderInput!) {
 }
 ```
 
+### Create User and Order
 
+```
+mutation sendUserAndOrder($user_data_input: CreateUserInput!, $order_data_input: CreateOrderInput!) {
+  createUser(input: $user_data_input) {
+    user_id
+    completionObj {
+      code
+      msg_id
+      msg
+      processed
+      modified
+    }
+  }
+  createOrder(input: $order_data_input) {
+    order_id
+    completionObj {
+      code
+      msg_id
+      msg
+      processed
+      modified
+    }
+  }
+}
+```
 
 #### Variables 
 ```json

@@ -1,6 +1,10 @@
-# Demo GraphQL Server and MongoDB Application 
+# Demo GraphQL Server with NodeJS and MongoDB 
 
-WIP
+This is a demo project for the the EXLskills free and open-source GraphQL Server with NodeJS and MongoDB A$AP Course.
+
+The complete course is available at https://exlskills.com/learn-en/courses/aap-graphql-server-with-nodejs-and-mongodb--gql_node_mgo_asap - no login required.
+
+The project is assumed to be installed and executed in a Docker-based environment. See course chapter "Launching Dev Environment Docker Containers" for more information   
 
 ## License
 
